@@ -43,10 +43,11 @@ class Policy:
         current_location = self.me
         for i in range(len(self.action_map)):
             if hasattr(self.game, 'player_agent'):
-                if self.game.player_agent.energy_enough(i):
+                me = self.game.player_agent if self.player_num else self.game.player_opponent
+                if me.energy_enough(i):
                     if self.game.getPlayerDistance() <= 4:
                         all_actions.append(self.action_map[i])
-                    elif self.game.player_agent.energy_cost[i] > 0:
+                    elif me.energy_cost[i] > 0:
                         all_actions.append(self.action_map[i])
             else:
                 all_actions.append(self.action_map[i])
